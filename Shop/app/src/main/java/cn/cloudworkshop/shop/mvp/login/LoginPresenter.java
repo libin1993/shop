@@ -1,0 +1,37 @@
+package cn.cloudworkshop.shop.mvp.login;
+
+import cn.cloudworkshop.shop.base.BaseBean;
+import cn.cloudworkshop.shop.base.BasePresenterImpl;
+import cn.cloudworkshop.shop.base.RetrofitUtils;
+import cn.cloudworkshop.shop.base.RxObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+
+/**
+ * Author：Libin on 2018/11/28 14:14
+ * Email：1993911441@qq.com
+ * Describe：
+ */
+public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter {
+    @Override
+    public void login(String username, String pwd) {
+        RetrofitUtils.getInstance()
+                .request()
+                .login(username, pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxObserver<>(new RxObserver.Callback<BaseBean>() {
+                    @Override
+                    public void onSuccess(BaseBean baseBean) {
+                        getView().loginSuccess(baseBean.getToken());
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        getView().loginFail(msg);
+                    }
+
+                }));
+    }
+}

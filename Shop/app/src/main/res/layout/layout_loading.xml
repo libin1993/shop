@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<cn.cloudworkshop.shop.utils.LoadingView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loading_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</cn.cloudworkshop.shop.utils.LoadingView>
