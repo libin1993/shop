@@ -21,28 +21,27 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="76dp"
             android:layout_marginRight="60dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:scaleType="center"
                 android:src="@mipmap/ic_username"/>
 
             <EditText
                 android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="27dp"
                 android:background="@null"
                 android:hint="@string/please_input_no"
-                android:maxLength="20"
-                android:singleLine="true"
                 android:textColor="@color/gray_22"
                 android:textColorHint="@color/gray_92"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:maxLength="16"
+                android:singleLine="true"/>
 
         </LinearLayout>
 
@@ -60,36 +59,27 @@
             android:layout_marginLeft="76dp"
             android:layout_marginTop="53dp"
             android:layout_marginRight="50dp"
-            android:gravity="bottom"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
+
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:src="@mipmap/ic_user_password"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_user_password"/>
-
-                <EditText
-                    android:id="@+id/et_user_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="27dp"
-                    android:background="@null"
-                    android:hint="@string/please_input_pwd"
-                    android:maxLength="20"
-                    android:singleLine="true"
-                    android:textColor="@color/gray_22"
-                    android:textColorHint="@color/gray_92"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-
+            <EditText
+                android:id="@+id/et_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:background="@null"
+                android:hint="@string/please_input_pwd"
+                android:textColor="@color/gray_22"
+                android:textColorHint="@color/gray_92"
+                android:textSize="14sp"
+                android:maxLength="16"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <View
@@ -107,8 +97,10 @@
             android:layout_marginLeft="45dp"
             android:layout_marginTop="57dp"
             android:layout_marginRight="45dp"
-            android:src="@drawable/login_selector"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/login_selector"/>
 
     </LinearLayout>
+    <include
+        layout="@layout/layout_loading"/>
 </RelativeLayout>

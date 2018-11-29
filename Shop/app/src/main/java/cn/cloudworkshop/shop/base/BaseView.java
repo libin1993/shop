@@ -6,5 +6,7 @@ package cn.cloudworkshop.shop.base;
  * Describe：
  */
 public interface BaseView {
+    void hideLoading();
 
+    void loadError();
 }

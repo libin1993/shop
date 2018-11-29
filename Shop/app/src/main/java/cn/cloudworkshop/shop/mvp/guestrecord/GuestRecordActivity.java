@@ -1,4 +1,4 @@
-package cn.cloudworkshop.shop.mvp.customerlist;
+package cn.cloudworkshop.shop.mvp.guestrecord;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,32 +22,36 @@ import butterknife.ButterKnife;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.bean.CustomerListBean;
-import cn.cloudworkshop.shop.mvp.guestrecord.GuestRecordActivity;
-import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
-import cn.cloudworkshop.shop.utils.SPUtils;
+import cn.cloudworkshop.shop.bean.GuestRecordBean;
+import cn.cloudworkshop.shop.mvp.customerlist.CustomerListActivity;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;
 
 /**
- * Author：Libin on 2018/11/28 18:08
+ * Author：Libin on 2018/11/29 16:06
  * Email：1993911441@qq.com
  * Describe：
  */
-public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.Presenter> implements CustomerListContract.View {
+public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Presenter> implements GuestRecordContract.View {
     @BindView(R.id.rv_customer_list)
-    RecyclerView rvCustomer;
+    RecyclerView rvRecord;
     @BindView(R.id.sfr_customer)
-    SmartRefreshLayout sfrCustomer;
+    SmartRefreshLayout sfrRecord;
     @BindView(R.id.loading_view)
     LoadingView loadingView;
-    private int shopId;
+
+    private int guestId;
     private int page = 1;
     //0:init, 1: refresh, 2:load
     private int type;
 
-    private List<CustomerListBean.DataBean> dataList = new ArrayList<>();
-    private CommonAdapter<CustomerListBean.DataBean> adapter;
+    private List<GuestRecordBean.DataBean> dataList = new ArrayList<>();
+    private CommonAdapter<GuestRecordBean.DataBean> adapter;
 
+    @Override
+    protected GuestRecordContract.Presenter initPresenter() {
+        return new GuestRecordPresenter();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,28 +63,26 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
     }
 
     private void getData() {
-        shopId = getIntent().getIntExtra("shop_id", 0);
+        guestId = getIntent().getIntExtra("guest_id", 0);
     }
 
     private void initView() {
         loadingView.setState(LoadingView.State.LOADING);
-        mPresenter.initData(shopId, page, type);
-        rvCustomer.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommonAdapter<CustomerListBean.DataBean>(this, R.layout.rv_shop_list_item, dataList) {
+        mPresenter.initData(guestId, page, type);
+        rvRecord.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CommonAdapter<GuestRecordBean.DataBean>(this, R.layout.rv_shop_list_item, dataList) {
             @Override
-            protected void convert(ViewHolder holder, CustomerListBean.DataBean dataBean, int position) {
-                holder.setText(R.id.tv_item, dataBean.getGuest_name());
+            protected void convert(ViewHolder holder, GuestRecordBean.DataBean dataBean, int position) {
+                holder.setText(R.id.tv_item, dataBean.getRecent_visit_at());
             }
 
         };
-        rvCustomer.setAdapter(adapter);
+        rvRecord.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                Intent intent = new Intent(CustomerListActivity.this,GuestRecordActivity.class);
-                intent.putExtra("guest_id",dataList.get(position).getGuest_id());
-                startActivity(intent);
+
             }
 
             @Override
@@ -90,33 +92,52 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
         });
 
 
-        sfrCustomer.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+        sfrRecord.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 page++;
                 type = 2;
-                mPresenter.initData(shopId, page, type);
+                mPresenter.initData(guestId, page, type);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 page = 1;
                 type = 1;
-                mPresenter.initData(shopId, page, type);
+                mPresenter.initData(guestId, page, type);
             }
         });
 
         loadingView.setOnRetryListener(new LoadingView.OnRetryListener() {
             @Override
             public void onRetry() {
-                mPresenter.initData(shopId, page, type);
+                mPresenter.initData(guestId, page, type);
             }
         });
     }
 
     @Override
-    protected CustomerListContract.Presenter initPresenter() {
-        return new CustomerListPresenter();
+    public void finishRefresh() {
+        sfrRecord.finishRefresh();
+    }
+
+    @Override
+    public void finishLoad() {
+        sfrRecord.finishLoadMore();
+    }
+
+    @Override
+    public void loadSuccess(List<GuestRecordBean.DataBean> recordList) {
+        if (type != 2) {
+            dataList.clear();
+        }
+        dataList.addAll(recordList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        ToastUtils.showToast(GuestRecordActivity.this, msg);
     }
 
     @Override
@@ -125,31 +146,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
     }
 
     @Override
-    public void finishRefresh() {
-        sfrCustomer.finishRefresh();
-    }
-
-    @Override
-    public void finishLoad() {
-        sfrCustomer.finishLoadMore();
-    }
-
-    @Override
     public void loadError() {
         loadingView.setState(LoadingView.State.LOAD_ERROR);
-    }
-
-    @Override
-    public void loadSuccess(List<CustomerListBean.DataBean> customerList) {
-        if (type != 2) {
-            dataList.clear();
-        }
-        dataList.addAll(customerList);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void loadFail(String msg) {
-        ToastUtils.showToast(CustomerListActivity.this,msg);
     }
 }

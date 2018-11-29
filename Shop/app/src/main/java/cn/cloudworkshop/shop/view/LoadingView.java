@@ -1,4 +1,4 @@
-package cn.cloudworkshop.shop.utils;
+package cn.cloudworkshop.shop.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -50,7 +50,7 @@ public class LoadingView extends FrameLayout implements View.OnClickListener {
         loading = findViewById(R.id.ll_loading);
         error = findViewById(R.id.ll_load_error);
         setOnClickListener(this);
-        setState(State.LOADING);
+        setVisibility(GONE);
     }
 
     public void setState(State state) {

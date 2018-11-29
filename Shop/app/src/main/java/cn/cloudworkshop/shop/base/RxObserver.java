@@ -28,7 +28,7 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
         if (t.getCode() == 10000) {
             mCallback.onSuccess(t);
         } else {
-            mCallback.onError(t.getMsg());
+            mCallback.onFail(t.getMsg());
         }
     }
 
@@ -36,7 +36,7 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
     @Override
     public void onError(@NonNull Throwable e) {
         e.printStackTrace();
-        mCallback.onError(e.getMessage());
+        mCallback.onError();
     }
 
     @Override
@@ -48,6 +48,8 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
     public interface Callback<T> {
         void onSuccess(T t);
 
-        void onError(String msg);
+        void onFail(String msg);
+
+        void onError();
     }
 }

@@ -18,6 +18,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> implements ShopListContract.Presenter {
     @Override
     public void initData(String token) {
+        if (!isViewAttached())
+            return;
         RetrofitUtils.getInstance()
                 .request()
                 .shopList(token)
@@ -31,9 +33,15 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
                     }
 
                     @Override
-                    public void onError(String msg) {
+                    public void onFail(String msg) {
+                        getView().loadFail(msg);
+                    }
+
+                    @Override
+                    public void onError() {
                         getView().loadError();
                     }
+
                 }));
     }
 }

@@ -17,6 +17,7 @@ import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
 import cn.cloudworkshop.shop.utils.SPUtils;
 import cn.cloudworkshop.shop.utils.ToastUtils;
+import cn.cloudworkshop.shop.view.LoadingView;
 
 /**
  * Author：Libin on 2018/11/28 13:56
@@ -30,6 +31,8 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.Presenter> impl
     EditText etPwd;
     @BindView(R.id.iv_login)
     ImageView ivLogin;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
     //是否输入账号
     private boolean isNo;
@@ -106,7 +109,7 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.Presenter> impl
 
     @Override
     public void loginSuccess(String token) {
-        SPUtils.saveStr(LoginActivity.this,"token",token);
+        SPUtils.saveStr(LoginActivity.this, "token", token);
         startActivity(new Intent(LoginActivity.this, ShopListActivity.class));
         finish();
     }
@@ -118,6 +121,17 @@ public class LoginActivity extends BaseMvpActivity<LoginContract.Presenter> impl
 
     @OnClick(R.id.iv_login)
     public void onViewClicked() {
+        loadingView.setState(LoadingView.State.LOADING);
         mPresenter.login(etUserName.getText().toString(), etPwd.getText().toString());
+    }
+
+    @Override
+    public void hideLoading() {
+        loadingView.setState(LoadingView.State.LOAD_DONE);
+    }
+
+    @Override
+    public void loadError() {
+        loadingView.setState(LoadingView.State.LOAD_ERROR);
     }
 }

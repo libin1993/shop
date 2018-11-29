@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal">
-    <cn.cloudworkshop.shop.utils.GifView
+    <cn.cloudworkshop.shop.view.GifView
         android:id="@+id/gif_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

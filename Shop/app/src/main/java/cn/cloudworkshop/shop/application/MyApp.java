@@ -2,6 +2,7 @@ package cn.cloudworkshop.shop.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -12,7 +13,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.wang.avi.indicators.BallSpinFadeLoaderIndicator;
 
-import cn.cloudworkshop.shop.utils.MyRefreshHeader;
+import cn.cloudworkshop.shop.view.MyRefreshHeader;
 
 
 /**
@@ -59,5 +60,11 @@ public class MyApp extends Application {
 
     public static Context getContext() {
         return mContext;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

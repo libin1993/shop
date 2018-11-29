@@ -16,6 +16,8 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter {
     @Override
     public void login(String username, String pwd) {
+        if (!isViewAttached())
+            return;
         RetrofitUtils.getInstance()
                 .request()
                 .login(username, pwd)
@@ -25,13 +27,19 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     @Override
                     public void onSuccess(BaseBean baseBean) {
                         getView().loginSuccess(baseBean.getToken());
+                        getView().hideLoading();
                     }
 
                     @Override
-                    public void onError(String msg) {
+                    public void onFail(String msg) {
                         getView().loginFail(msg);
+                        getView().hideLoading();
                     }
 
+                    @Override
+                    public void onError() {
+                        getView().loadError();
+                    }
                 }));
     }
 }

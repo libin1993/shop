@@ -14,11 +14,10 @@ import cn.cloudworkshop.shop.mvp.login.LoginContract;
  */
 public class ShopListContract {
     interface View extends BaseView {
-        void hideLoading();
-
-        void loadError();
 
         void loadSuccess(List<ShopListBean.DataBean> shopList);
+
+        void loadFail(String msg);
     }
 
     interface Presenter extends BasePresenter<ShopListContract.View> {

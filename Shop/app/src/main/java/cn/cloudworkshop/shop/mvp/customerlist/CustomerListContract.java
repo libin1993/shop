@@ -14,15 +14,13 @@ import cn.cloudworkshop.shop.bean.CustomerListBean;
 public class CustomerListContract {
     interface View extends BaseView {
 
-        void hideLoading();
-
         void finishRefresh();
 
         void finishLoad();
 
-        void loadError();
-
         void loadSuccess(List<CustomerListBean.DataBean> customerList);
+
+        void loadFail(String msg);
     }
 
     interface Presenter extends BasePresenter<View> {

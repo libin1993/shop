@@ -1,4 +1,4 @@
-package cn.cloudworkshop.shop.utils;
+package cn.cloudworkshop.shop.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

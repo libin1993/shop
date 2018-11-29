@@ -13,6 +13,7 @@ import cn.cloudworkshop.shop.base.RetrofitUtils;
 import cn.cloudworkshop.shop.base.RxObserver;
 import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
 import cn.cloudworkshop.shop.mvp.login.LoginActivity;
+import cn.cloudworkshop.shop.utils.GlideApp;
 import cn.cloudworkshop.shop.utils.SPUtils;
 import cn.cloudworkshop.shop.utils.TitleBarUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,7 +68,7 @@ public class SplashActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onError(String msg) {
+                    public void onFail(String msg) {
                         long millisecond = System.currentTimeMillis() - currentTime;
                         if (millisecond < 2500) {
                             timing(2500 - millisecond, false);
@@ -76,7 +77,13 @@ public class SplashActivity extends BaseActivity {
                             finish();
                         }
                     }
+
+                    @Override
+                    public void onError() {
+
+                    }
                 }));
+
     }
 
     /**
