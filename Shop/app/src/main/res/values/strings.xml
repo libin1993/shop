@@ -1,5 +1,35 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">门店</string>
     <string name="please_input_pwd">请输入密码</string>
     <string name="please_input_no">请输入账号</string>
+    <string name="shop_list">门店列表</string>
+    <string name="shop_customer">门店访客</string>
+    <string name="guest_record">访客记录</string>
+    <string name="read_and_write">读写内存</string>
+    <string name="shop_name">门店名称：</string>
+    <string name="shop_info">门店信息：</string>
+    <string name="shop_address">门店地址：</string>
+    <string name="customer_name">访客名称：</string>
+    <string name="customer_sex">访客性别：</string>
+    <string name="customer_age">访客年龄：</string>
+    <string name="customer_type">访客类型：</string>
+    <string name="customer_record">访客记录：</string>
+    <string name="visit_time">访问时间：</string>
+    <string name="input_name">请输入姓名</string>
+    <string name="input_age">请输入年龄</string>
+    <string name="customer_phone">访客手机：</string>
+    <string name="save">保存</string>
+    <string name="name">姓名：</string>
+    <string name="sex">性别：</string>
+    <string name="age">年龄：</string>
+    <string name="phone">手机：</string>
+    <string name="type">类型：</string>
+    <string name="input_phone">请输入手机号码</string>
+    <string name="input_type">请输入访客类型</string>
+    <string name="input_sex">请输入性别</string>
+    <string name="alter">编辑</string>
+    <string name="record">记录</string>
+    <string name="guset_info">顾客信息</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
 </resources>

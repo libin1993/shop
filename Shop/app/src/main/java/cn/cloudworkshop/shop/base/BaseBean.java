@@ -46,4 +46,14 @@ public class BaseBean<T> implements Serializable {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String toString() {
+        return "BaseBean{" +
+                "code=" + code +
+                ", data=" + data +
+                ", msg='" + msg + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

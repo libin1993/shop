@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -19,12 +21,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.bean.CustomerListBean;
+import cn.cloudworkshop.shop.mvp.altercutomer.AlterCustomerActivity;
 import cn.cloudworkshop.shop.mvp.guestrecord.GuestRecordActivity;
-import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
-import cn.cloudworkshop.shop.utils.SPUtils;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;
 
@@ -40,6 +42,12 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
     SmartRefreshLayout sfrCustomer;
     @BindView(R.id.loading_view)
     LoadingView loadingView;
+    @BindView(R.id.iv_header_back)
+    ImageView ivHeaderBack;
+    @BindView(R.id.tv_header_title)
+    TextView tvHeaderTitle;
+    @BindView(R.id.view_header_line)
+    View viewHeaderLine;
     private int shopId;
     private int page = 1;
     //0:init, 1: refresh, 2:load
@@ -63,31 +71,79 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
     }
 
     private void initView() {
+        tvHeaderTitle.setText(R.string.shop_customer);
+        viewHeaderLine.setVisibility(View.VISIBLE);
         loadingView.setState(LoadingView.State.LOADING);
         mPresenter.initData(shopId, page, type);
         rvCustomer.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommonAdapter<CustomerListBean.DataBean>(this, R.layout.rv_shop_list_item, dataList) {
+        adapter = new CommonAdapter<CustomerListBean.DataBean>(this, R.layout.rv_customer_list_item, dataList) {
             @Override
-            protected void convert(ViewHolder holder, CustomerListBean.DataBean dataBean, int position) {
-                holder.setText(R.id.tv_item, dataBean.getGuest_name());
-            }
+            protected void convert(ViewHolder holder, CustomerListBean.DataBean dataBean, final int position) {
+                holder.setText(R.id.tv_name_customer, dataBean.getGuest_name());
+                holder.setText(R.id.tv_age_customer, String.valueOf(dataBean.getGuest_age()));
+                String sex;
+                switch (dataBean.getGuest_gender()) {
+                    case 1:
+                        sex = "男";
+                        break;
+                    case 2:
+                        sex = "女";
+                        break;
+                    default:
+                        sex = "保密";
+                        break;
+                }
+                holder.setText(R.id.tv_sex_customer, sex);
 
+                String type;
+                switch (dataBean.getGuest_type()) {
+                    case 1:
+                        type = "员工";
+                        break;
+                    case 2:
+                        type = "非顾客";
+                        break;
+                    case 3:
+                        type = "会员";
+                        break;
+                    case 4:
+                        type = "老客";
+                        break;
+                    case 5:
+                        type = "新客";
+                        break;
+                    default:
+                        type = "保密";
+                        break;
+                }
+                holder.setText(R.id.tv_type_customer, type);
+                holder.setText(R.id.tv_phone_customer, dataBean.getGuest_mobile());
+
+
+                TextView tvRecord = holder.getView(R.id.tv_customer_record);
+                TextView tvAlter = holder.getView(R.id.tv_alter_customer);
+
+                tvRecord.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(CustomerListActivity.this, GuestRecordActivity.class);
+                        intent.putExtra("guest_id", dataList.get(position).getGuest_id());
+                        startActivity(intent);
+                    }
+                });
+
+                tvAlter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(CustomerListActivity.this, AlterCustomerActivity.class);
+                        intent.putExtra("guest", dataList.get(position));
+                        startActivity(intent);
+                    }
+                });
+
+            }
         };
         rvCustomer.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                Intent intent = new Intent(CustomerListActivity.this,GuestRecordActivity.class);
-                intent.putExtra("guest_id",dataList.get(position).getGuest_id());
-                startActivity(intent);
-            }
-
-            @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
-                return false;
-            }
-        });
 
 
         sfrCustomer.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
@@ -109,6 +165,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
         loadingView.setOnRetryListener(new LoadingView.OnRetryListener() {
             @Override
             public void onRetry() {
+                loadingView.setState(LoadingView.State.LOADING);
                 mPresenter.initData(shopId, page, type);
             }
         });
@@ -150,6 +207,11 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
 
     @Override
     public void loadFail(String msg) {
-        ToastUtils.showToast(CustomerListActivity.this,msg);
+        ToastUtils.showToast(CustomerListActivity.this, msg);
+    }
+
+    @OnClick(R.id.iv_header_back)
+    public void onViewClicked() {
+        finish();
     }
 }

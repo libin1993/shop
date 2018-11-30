@@ -72,7 +72,6 @@ public class CustomerListPresenter extends BasePresenterImpl<CustomerListContrac
                         public void onError() {
                             getView().loadError();
                         }
-
                     }));
         } else {
             getView().finishLoad();

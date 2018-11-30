@@ -34,6 +34,7 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
 
                     @Override
                     public void onFail(String msg) {
+                        getView().hideLoading();
                         getView().loadFail(msg);
                     }
 

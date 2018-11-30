@@ -68,6 +68,7 @@
         <activity android:name=".ui.ShopActivity"/>
         <activity android:name=".mvp.customerlist.CustomerListActivity"/>
         <activity android:name=".mvp.guestrecord.GuestRecordActivity"/>
+        <activity android:name=".mvp.altercutomer.AlterCustomerActivity"/>
 
         <service
             android:name=".service.GeTuiService"

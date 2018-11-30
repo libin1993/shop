@@ -1,11 +1,12 @@
 package cn.cloudworkshop.shop.mvp.guestrecord;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -19,11 +20,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
-import cn.cloudworkshop.shop.bean.CustomerListBean;
 import cn.cloudworkshop.shop.bean.GuestRecordBean;
-import cn.cloudworkshop.shop.mvp.customerlist.CustomerListActivity;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;
 
@@ -39,6 +39,10 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
     SmartRefreshLayout sfrRecord;
     @BindView(R.id.loading_view)
     LoadingView loadingView;
+    @BindView(R.id.iv_header_back)
+    ImageView ivHeaderBack;
+    @BindView(R.id.tv_header_title)
+    TextView tvHeaderTitle;
 
     private int guestId;
     private int page = 1;
@@ -67,15 +71,15 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
     }
 
     private void initView() {
+        tvHeaderTitle.setText(R.string.guest_record);
         loadingView.setState(LoadingView.State.LOADING);
         mPresenter.initData(guestId, page, type);
         rvRecord.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CommonAdapter<GuestRecordBean.DataBean>(this, R.layout.rv_shop_list_item, dataList) {
+        adapter = new CommonAdapter<GuestRecordBean.DataBean>(this, R.layout.rv_record_list_item, dataList) {
             @Override
             protected void convert(ViewHolder holder, GuestRecordBean.DataBean dataBean, int position) {
-                holder.setText(R.id.tv_item, dataBean.getRecent_visit_at());
+                holder.setText(R.id.tv_time_visit, dataBean.getRecent_visit_at());
             }
-
         };
         rvRecord.setAdapter(adapter);
 
@@ -111,6 +115,7 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
         loadingView.setOnRetryListener(new LoadingView.OnRetryListener() {
             @Override
             public void onRetry() {
+                loadingView.setState(LoadingView.State.LOADING);
                 mPresenter.initData(guestId, page, type);
             }
         });
@@ -148,5 +153,10 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
     @Override
     public void loadError() {
         loadingView.setState(LoadingView.State.LOAD_ERROR);
+    }
+
+    @OnClick(R.id.iv_header_back)
+    public void onViewClicked() {
+        finish();
     }
 }

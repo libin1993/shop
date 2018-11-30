@@ -1,5 +1,8 @@
 package cn.cloudworkshop.shop.base;
 
+import cn.cloudworkshop.shop.application.MyApp;
+import cn.cloudworkshop.shop.utils.LogUtils;
+import cn.cloudworkshop.shop.utils.SPUtils;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -20,15 +23,23 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        //mIResult.onStart();
+
     }
 
     @Override
     public void onNext(T t) {
-        if (t.getCode() == 10000) {
-            mCallback.onSuccess(t);
-        } else {
-            mCallback.onFail(t.getMsg());
+        LogUtils.log(t.toString());
+        switch (t.getCode()) {
+            case 10000:
+                mCallback.onSuccess(t);
+                break;
+            case 10001:
+                SPUtils.deleteStr(MyApp.getContext(),"token");
+                mCallback.onFail(t.getMsg());
+                break;
+            default:
+                mCallback.onFail(t.getMsg());
+                break;
         }
     }
 

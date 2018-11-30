@@ -2,6 +2,7 @@ package cn.cloudworkshop.shop.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.cloudworkshop.shop.base.BaseBean;
@@ -74,7 +75,7 @@ public class CustomerListBean extends BaseBean<List<CustomerListBean.DataBean>> 
         }
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * guest_id : 117808941063602176
          * guest_gender : 1

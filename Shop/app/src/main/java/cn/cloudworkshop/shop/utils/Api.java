@@ -1,12 +1,15 @@
 package cn.cloudworkshop.shop.utils;
 
 
+import java.util.Map;
+
 import cn.cloudworkshop.shop.base.BaseBean;
 import cn.cloudworkshop.shop.bean.CustomerListBean;
 import cn.cloudworkshop.shop.bean.GuestRecordBean;
 import cn.cloudworkshop.shop.bean.ShopListBean;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -18,28 +21,32 @@ import retrofit2.http.Query;
  * Describe：
  */
 public interface Api {
-//    String HOST = "http://192.168.1.97/";
-    String HOST = "http://api.cloudworkshop.cn/";
+    String HOST = "http://192.168.1.97/";
+//    String HOST = "http://api.cloudworkshop.cn/";
 
     @FormUrlEncoded
-    @POST("admin/login/app_login_on")
+    @POST("index.php/admin/login/app_login_on")
     Observable<BaseBean> login(@Field("account_name") String username, @Field("account_password") String pwd);
 
     @FormUrlEncoded
-    @POST("h5/login/isvalid_token")
+    @POST("index.php/h5/login/isvalid_token")
     Observable<BaseBean> isLogin(@Field("token") String token);
 
     @FormUrlEncoded
-    @POST("admin/shop/index")
+    @POST("index.php/admin/shop/index")
     Observable<ShopListBean> shopList(@Field("token") String token);
 
     @FormUrlEncoded
-    @POST("admin/mrj/get_visit_users")
+    @POST("index.php/admin/mrj/get_visit_users")
     Observable<CustomerListBean> customerList(@Field("token") String token, @Field("company_id") int shopId, @Field("page") int page);
 
     @FormUrlEncoded
-    @POST("admin/mrj/get_user_history")
+    @POST("index.php/admin/mrj/get_user_history")
     Observable<GuestRecordBean> guestRecord(@Field("token") String token, @Field("guest_id") int guestId, @Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("index.php/admin/mrj/edit_user")
+    Observable<BaseBean> alterCustomer(@FieldMap Map<String, Object> map);
 }
 
 

@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
+import cn.cloudworkshop.shop.utils.LogUtils;
 import cn.cloudworkshop.shop.utils.SPUtils;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;

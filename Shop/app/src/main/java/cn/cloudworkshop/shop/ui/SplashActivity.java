@@ -11,12 +11,15 @@ import cn.cloudworkshop.shop.base.BaseActivity;
 import cn.cloudworkshop.shop.base.BaseBean;
 import cn.cloudworkshop.shop.base.RetrofitUtils;
 import cn.cloudworkshop.shop.base.RxObserver;
+import cn.cloudworkshop.shop.mvp.altercutomer.AlterCustomerActivity;
 import cn.cloudworkshop.shop.mvp.shoplist.ShopListActivity;
 import cn.cloudworkshop.shop.mvp.login.LoginActivity;
-import cn.cloudworkshop.shop.utils.GlideApp;
+
 import cn.cloudworkshop.shop.utils.SPUtils;
 import cn.cloudworkshop.shop.utils.TitleBarUtils;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -30,7 +33,8 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         TitleBarUtils.setNoTitleBar(this);
         setContentView(R.layout.activity_splash);
-        initView();
+        startActivity(new Intent(this,AlterCustomerActivity.class));
+//        initView();
     }
 
     private void initView() {
