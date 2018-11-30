@@ -33,8 +33,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         TitleBarUtils.setNoTitleBar(this);
         setContentView(R.layout.activity_splash);
-        startActivity(new Intent(this,AlterCustomerActivity.class));
-//        initView();
+        initView();
     }
 
     private void initView() {

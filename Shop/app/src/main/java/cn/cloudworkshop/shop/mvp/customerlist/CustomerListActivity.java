@@ -16,6 +16,9 @@ import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         getData();
         initView();
     }
@@ -213,5 +217,20 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
     @OnClick(R.id.iv_header_back)
     public void onViewClicked() {
         finish();
+    }
+
+    @Subscribe
+    public void alterSuccess(String msg) {
+        if ("alter_success".equals(msg)) {
+            page = 1;
+            type = 1;
+            mPresenter.initData(shopId, page, type);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

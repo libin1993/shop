@@ -170,4 +170,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"/>
 
+    <include
+        layout="@layout/layout_loading"/>
+
 </RelativeLayout>

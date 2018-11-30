@@ -34,7 +34,7 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
                 mCallback.onSuccess(t);
                 break;
             case 10001:
-                SPUtils.deleteStr(MyApp.getContext(),"token");
+                SPUtils.deleteStr(MyApp.getContext(), "token");
                 mCallback.onFail(t.getMsg());
                 break;
             default:
