@@ -84,7 +84,13 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
             @Override
             protected void convert(ViewHolder holder, CustomerListBean.DataBean dataBean, final int position) {
                 holder.setText(R.id.tv_name_customer, dataBean.getGuest_name());
-                holder.setText(R.id.tv_age_customer, String.valueOf(dataBean.getGuest_age()));
+                int age = dataBean.getGuest_age();
+                String customerAge = "";
+                if (age > 0) {
+                    customerAge = String.valueOf(age);
+                }
+                holder.setText(R.id.tv_age_customer, customerAge);
+
                 String sex;
                 switch (dataBean.getGuest_gender()) {
                     case 1:
@@ -94,7 +100,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
                         sex = "女";
                         break;
                     default:
-                        sex = "保密";
+                        sex = "";
                         break;
                 }
                 holder.setText(R.id.tv_sex_customer, sex);
@@ -117,7 +123,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
                         type = "新客";
                         break;
                     default:
-                        type = "保密";
+                        type = "";
                         break;
                 }
                 holder.setText(R.id.tv_type_customer, type);

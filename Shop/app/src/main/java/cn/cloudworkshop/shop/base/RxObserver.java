@@ -53,7 +53,6 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
     @Override
     public void onComplete() {
 
-
     }
 
     public interface Callback<T> {

@@ -21,8 +21,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         if (mPresenter == null) {
             throw new NullPointerException("Presenter is null! Do you return null in initPresenter()?");
         }
-        mPresenter.
-                attach(this);
+        mPresenter.attach(this);
 
     }
 
