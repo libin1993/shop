@@ -9,127 +9,143 @@
     android:orientation="vertical"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tv_customer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/customer_name"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_name_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_customer_name"
-        android:layout_toRightOf="@id/tv_customer_name"
-        android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_customer_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_customer_name"
-        android:layout_marginTop="8dp"
-        android:text="@string/customer_sex"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_sex_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_customer_sex"
-        android:layout_toRightOf="@id/tv_customer_sex"
-        android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_customer_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_customer_sex"
-        android:layout_marginTop="8dp"
-        android:text="@string/customer_age"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_age_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_customer_age"
-        android:layout_toRightOf="@id/tv_customer_age"
-        android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_customer_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_customer_age"
-        android:layout_marginTop="8dp"
-        android:text="@string/customer_phone"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_phone_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_customer_phone"
-        android:layout_toRightOf="@id/tv_customer_phone"
-        android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
-
-    <TextView
-        android:id="@+id/tv_customer_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_customer_phone"
-        android:layout_marginTop="8dp"
-        android:text="@string/customer_type"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/tv_type_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_customer_type"
-        android:layout_toRightOf="@id/tv_customer_type"
-        android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+    <ImageView
+        android:id="@+id/iv_customer_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:scaleType="fitCenter"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_customer_avatar"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:id="@+id/tv_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textColor="@color/gray_22"
+            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv_alter_customer"
-            android:layout_width="50dp"
-            android:layout_height="24dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bound_gray_5dp"
-            android:textSize="13sp"
-            android:text="@string/alter"
-            android:gravity="center"/>
+            android:id="@+id/tv_name_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_customer_name"
+            android:layout_toRightOf="@id/tv_customer_name"
+            android:textColor="@color/gray_6a"
+            android:textSize="14sp"/>
+
 
         <TextView
-            android:id="@+id/tv_customer_record"
-            android:layout_width="50dp"
-            android:layout_height="24dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bound_gray_5dp"
-            android:textSize="13sp"
-            android:text="@string/record"
-            android:gravity="center"
-            android:layout_marginTop="15dp"/>
-    </LinearLayout>
+            android:id="@+id/tv_customer_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_customer_name"
+            android:layout_marginTop="8dp"
+            android:text="@string/sex"
+            android:textColor="@color/gray_22"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_sex_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_customer_sex"
+            android:layout_toRightOf="@id/tv_customer_sex"
+            android:textColor="@color/gray_6a"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_customer_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_customer_sex"
+            android:layout_marginTop="8dp"
+            android:text="@string/age"
+            android:textColor="@color/gray_22"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_age_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_customer_age"
+            android:layout_toRightOf="@id/tv_customer_age"
+            android:textColor="@color/gray_6a"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_customer_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_customer_age"
+            android:layout_marginTop="8dp"
+            android:text="@string/phone"
+            android:textColor="@color/gray_22"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_phone_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_customer_phone"
+            android:layout_toRightOf="@id/tv_customer_phone"
+            android:textColor="@color/gray_6a"
+            android:textSize="14sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_customer_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_customer_phone"
+            android:layout_marginTop="8dp"
+            android:text="@string/type"
+            android:textColor="@color/gray_22"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_type_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_customer_type"
+            android:layout_toRightOf="@id/tv_customer_type"
+            android:textColor="@color/gray_6a"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_alter_customer"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bound_gray_5dp"
+                android:textSize="13sp"
+                android:text="@string/alter"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_customer_record"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bound_gray_5dp"
+                android:textSize="13sp"
+                android:text="@string/record"
+                android:gravity="center"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
 
 </RelativeLayout>

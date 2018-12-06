@@ -1,5 +1,6 @@
 package cn.cloudworkshop.shop.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseActivity;
+import cn.cloudworkshop.shop.mvp.agestatistics.AgeStatisticsActivity;
 import cn.cloudworkshop.shop.mvp.customerlist.CustomerListActivity;
+import cn.cloudworkshop.shop.mvp.gueststatistics.GuestStatisticsActivity;
+import cn.cloudworkshop.shop.mvp.login.LoginActivity;
+import cn.cloudworkshop.shop.mvp.sexstatistics.SexStatisticsActivity;
+import cn.cloudworkshop.shop.mvp.timesstatistics.TimesStatisticsActivity;
+import cn.cloudworkshop.shop.utils.SPUtils;
+//import cn.cloudworkshop.shop.mvp.guestcount.GuestCountActivity;
 
 /**
  * Author：Libin on 2018/11/28 17:45
@@ -29,6 +37,16 @@ public class ShopActivity extends BaseActivity {
     View viewHeaderLine;
     @BindView(R.id.cv_shop_customer)
     CardView cvShopCustomer;
+    @BindView(R.id.cv_shop_data)
+    CardView cvShopData;
+    @BindView(R.id.cv_age)
+    CardView cvAge;
+    @BindView(R.id.cv_sex)
+    CardView cvSex;
+    @BindView(R.id.cv_times)
+    CardView cvTimes;
+    @BindView(R.id.tv_log_out)
+    TextView tvLogOut;
     private int shopId;
     private String shopName;
 
@@ -52,7 +70,7 @@ public class ShopActivity extends BaseActivity {
         shopName = intent.getStringExtra("shop_name");
     }
 
-    @OnClick({R.id.iv_header_back, R.id.cv_shop_customer})
+    @OnClick({R.id.iv_header_back, R.id.cv_shop_customer, R.id.cv_shop_data, R.id.cv_age, R.id.cv_sex, R.id.cv_times, R.id.tv_log_out})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_header_back:
@@ -62,6 +80,32 @@ public class ShopActivity extends BaseActivity {
                 Intent intent = new Intent(ShopActivity.this, CustomerListActivity.class);
                 intent.putExtra("shop_id", shopId);
                 startActivity(intent);
+                break;
+            case R.id.cv_shop_data:
+                Intent intentData = new Intent(ShopActivity.this, GuestStatisticsActivity.class);
+                intentData.putExtra("shop_id", shopId);
+                startActivity(intentData);
+                break;
+            case R.id.cv_age:
+                Intent intentAge = new Intent(ShopActivity.this, AgeStatisticsActivity.class);
+                intentAge.putExtra("shop_id", shopId);
+                startActivity(intentAge);
+                break;
+            case R.id.cv_sex:
+                Intent intentSex = new Intent(ShopActivity.this, SexStatisticsActivity.class);
+                intentSex.putExtra("shop_id", shopId);
+                startActivity(intentSex);
+                break;
+            case R.id.cv_times:
+                Intent intentTimes = new Intent(ShopActivity.this, TimesStatisticsActivity.class);
+                intentTimes.putExtra("shop_id", shopId);
+                startActivity(intentTimes);
+                break;
+            case R.id.tv_log_out:
+                SPUtils.deleteStr(this,"token");
+                Intent logout = new Intent(ShopActivity.this, LoginActivity.class);
+                logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(logout);
                 break;
         }
     }

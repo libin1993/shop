@@ -4,25 +4,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/white"
-                android:gravity="center_vertical"
                 android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tv_visit_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/visit_time"
-        android:textColor="@color/gray_22"
-        android:textSize="14sp"/>
+   <ImageView
+       android:id="@+id/iv_customer_record"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:scaleType="fitCenter"
+       android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/tv_time_visit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_visit_time"
-        android:layout_toRightOf="@id/tv_visit_time"
+        android:layout_toRightOf="@id/iv_customer_record"
         android:textColor="@color/gray_6a"
-        android:textSize="14sp"/>
-
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

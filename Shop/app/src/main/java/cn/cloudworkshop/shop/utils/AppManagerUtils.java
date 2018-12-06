@@ -26,7 +26,10 @@ public class AppManagerUtils {
 
     /**
      * 新建一个activity
+     *
      * @param activity
+     *
+     *
      */
 
     public void addActivity(Activity activity) {

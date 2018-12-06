@@ -140,6 +140,7 @@ public class AlterCustomerActivity extends BaseMvpActivity<AlterCustomerContract
     public void loadSuccess(String msg) {
         ToastUtils.showToast(this, msg);
         EventBus.getDefault().post("alter_success");
+        finish();
     }
 
     @Override
@@ -202,6 +203,7 @@ public class AlterCustomerActivity extends BaseMvpActivity<AlterCustomerContract
                 map.put("guest_mobile", phone);
             } else {
                 ToastUtils.showToast(this, "请输入正确的手机号码");
+                return;
             }
         }
 
@@ -230,7 +232,6 @@ public class AlterCustomerActivity extends BaseMvpActivity<AlterCustomerContract
         picker.setTopLineColor(ContextCompat.getColor(this, R.color.gray_15));
         picker.setCancelTextColor(ContextCompat.getColor(this, R.color.gray_22));
         picker.setSubmitTextColor(ContextCompat.getColor(this, R.color.gray_22));
-
         picker.setDividerColor(ContextCompat.getColor(this, R.color.gray_ed));
         picker.setTextColor(ContextCompat.getColor(this, R.color.gray_22), ContextCompat.getColor(this, R.color.gray_6a));
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {

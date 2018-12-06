@@ -43,7 +43,6 @@ public class AlterCustomerPresenter extends BasePresenterImpl<AlterCustomerContr
                     public void onError() {
                         getView().loadError();
                     }
-
                 }));
     }
 }

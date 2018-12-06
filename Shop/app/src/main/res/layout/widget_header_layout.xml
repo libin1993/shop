@@ -6,10 +6,11 @@
 
     <ImageView
         android:id="@+id/iv_header_back"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        android:paddingRight="20dp"
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_back_gray"/>
 

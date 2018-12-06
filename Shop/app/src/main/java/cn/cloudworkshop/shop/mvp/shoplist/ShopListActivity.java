@@ -1,8 +1,19 @@
 package cn.cloudworkshop.shop.mvp.shoplist;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +26,7 @@ import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +34,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
+import cn.cloudworkshop.shop.application.MyApp;
+import cn.cloudworkshop.shop.base.BaseBean;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.bean.ShopListBean;
+import cn.cloudworkshop.shop.bean.VersionBean;
+import cn.cloudworkshop.shop.service.DownloadService;
 import cn.cloudworkshop.shop.ui.ShopActivity;
 import cn.cloudworkshop.shop.utils.AppManagerUtils;
 import cn.cloudworkshop.shop.utils.SPUtils;
@@ -53,6 +69,7 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
 
     //退出应用
     private long exitTime = 0;
+    private DownloadService downloadService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +120,8 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
                 mPresenter.initData(SPUtils.getStr(ShopListActivity.this, "token"));
             }
         });
+
+        mPresenter.checkUpdate();
     }
 
     /**
@@ -128,7 +147,7 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        if (requestCode == 1234) {
+        if (requestCode == 1234 || requestCode == 1235) {
             PermissionDialog.showPermissionDialog(this, getString(R.string.read_and_write));
         }
     }
@@ -167,6 +186,73 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
     }
 
     @Override
+    public void newVersion(final VersionBean.DataBean data) {
+        if (data.getVersion_id() > getVersionCode()) {
+            if (EasyPermissions.hasPermissions(ShopListActivity.this,permissionStr)){
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ShopListActivity.this,
+                        R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+                dialog.setCancelable(false);
+                dialog.setTitle(R.string.check_new_version);
+                dialog.setMessage(data.getDescription());
+                //确定
+                dialog.setPositiveButton(R.string.update_immediately, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        downloadFile(data.getLink());
+                    }
+                });
+
+                dialog.create();
+                dialog.show();
+            }else {
+                EasyPermissions.requestPermissions(this, "", 1235, permissionStr);
+            }
+        }
+    }
+
+
+    /**
+     * 下载文件
+     */
+    private void downloadFile(String url) {
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle(getString(R.string.app_name));
+        request.setDescription(getString(R.string.downloading));
+        // 设置下载可见
+        request.setVisibleInDownloadsUi(true);
+        //下载完成后通知栏可见
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        //当前网络状态
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = null;
+        if (mConnectivityManager != null) {
+            networkInfo = mConnectivityManager.getActiveNetworkInfo();
+        }
+        if (networkInfo != null && networkInfo.isConnected()) {
+            String type = networkInfo.getTypeName();
+            if (type.equalsIgnoreCase("MOBILE")) {
+                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE);
+            }
+        }
+
+        // 设置下载位置
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "shop", "shop.apk");
+        if (file.exists()) {
+            file.delete();
+        }
+        request.setDestinationUri(Uri.fromFile(file));
+
+
+        downloadService = new DownloadService(file);
+        registerReceiver(downloadService, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        if (manager != null) {
+            manager.enqueue(request);
+        }
+    }
+
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -178,6 +264,30 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    /**
+     * 获取版本号
+     */
+
+    private int getVersionCode() {
+        PackageManager pm = this.getPackageManager();
+        PackageInfo pi = null;
+        try {
+            pi = pm.getPackageInfo(this.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return pi != null ? pi.versionCode : 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (downloadService != null) {
+            unregisterReceiver(downloadService);
+        }
+        super.onDestroy();
     }
 
 }

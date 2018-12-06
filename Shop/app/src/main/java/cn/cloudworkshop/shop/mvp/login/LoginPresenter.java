@@ -1,10 +1,12 @@
 package cn.cloudworkshop.shop.mvp.login;
 
+import cn.cloudworkshop.shop.application.MyApp;
 import cn.cloudworkshop.shop.base.BaseBean;
 import cn.cloudworkshop.shop.base.BasePresenterImpl;
 import cn.cloudworkshop.shop.base.RetrofitUtils;
 import cn.cloudworkshop.shop.base.RxObserver;
 import cn.cloudworkshop.shop.utils.LogUtils;
+import cn.cloudworkshop.shop.utils.SPUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -21,7 +23,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
             return;
         RetrofitUtils.getInstance()
                 .request()
-                .login(username, pwd)
+                .login(username, pwd,SPUtils.getStr(MyApp.getContext(),"client_id"))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RxObserver<>(new RxObserver.Callback<BaseBean>() {

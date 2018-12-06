@@ -74,7 +74,14 @@ public class CustomerListPresenter extends BasePresenterImpl<CustomerListContrac
                         }
                     }));
         } else {
-            getView().finishLoad();
+            switch (type) {
+                case 1:
+                    getView().finishRefresh();
+                    break;
+                case 2:
+                    getView().finishLoad();
+                    break;
+            }
         }
 
     }

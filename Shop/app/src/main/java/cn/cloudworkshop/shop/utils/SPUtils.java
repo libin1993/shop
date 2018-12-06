@@ -22,7 +22,6 @@ public class SPUtils {
         SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
         editor.putString(key, value);
         editor.commit();//提交修改
-        LogUtils.log(sharedPreferences.getString("key", ""));
     }
 
     /**

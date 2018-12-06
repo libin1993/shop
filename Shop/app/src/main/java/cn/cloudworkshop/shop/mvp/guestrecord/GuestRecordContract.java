@@ -26,6 +26,6 @@ public class GuestRecordContract {
     }
 
     interface Presenter extends BasePresenter<GuestRecordContract.View> {
-        void initData(int guestId, int page, int type);
+        void initData(String guestId, int page, int type);
     }
 }

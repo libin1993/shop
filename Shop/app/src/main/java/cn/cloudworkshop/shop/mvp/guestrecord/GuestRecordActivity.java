@@ -24,6 +24,7 @@ import butterknife.OnClick;
 import cn.cloudworkshop.shop.R;
 import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.bean.GuestRecordBean;
+import cn.cloudworkshop.shop.utils.GlideApp;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;
 
@@ -43,8 +44,10 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
     ImageView ivHeaderBack;
     @BindView(R.id.tv_header_title)
     TextView tvHeaderTitle;
+    @BindView(R.id.view_header_line)
+    View viewHeaderLine;
 
-    private int guestId;
+    private String guestId;
     private int page = 1;
     //0:init, 1: refresh, 2:load
     private int type;
@@ -67,17 +70,22 @@ public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Pre
     }
 
     private void getData() {
-        guestId = getIntent().getIntExtra("guest_id", 0);
+        guestId = getIntent().getStringExtra("guest_id");
     }
 
     private void initView() {
         tvHeaderTitle.setText(R.string.guest_record);
+        viewHeaderLine.setVisibility(View.VISIBLE);
         loadingView.setState(LoadingView.State.LOADING);
         mPresenter.initData(guestId, page, type);
         rvRecord.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CommonAdapter<GuestRecordBean.DataBean>(this, R.layout.rv_record_list_item, dataList) {
             @Override
             protected void convert(ViewHolder holder, GuestRecordBean.DataBean dataBean, int position) {
+                ImageView ivAvatar = holder.getView(R.id.iv_customer_record);
+                GlideApp.with(GuestRecordActivity.this)
+                        .load(dataBean.getRecent_visit_imgurl())
+                        .into(ivAvatar);
                 holder.setText(R.id.tv_time_visit, dataBean.getRecent_visit_at());
             }
         };

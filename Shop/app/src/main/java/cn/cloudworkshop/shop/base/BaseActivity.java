@@ -11,6 +11,7 @@ import com.igexin.sdk.PushManager;
 
 import cn.cloudworkshop.shop.service.GeTuiIntentService;
 import cn.cloudworkshop.shop.service.GeTuiService;
+import cn.cloudworkshop.shop.utils.AppManagerUtils;
 
 /**
  * Author：Libin on 2018/10/25 15:16
@@ -22,6 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        AppManagerUtils.getInstance().addActivity(this);
         //个推
         PushManager.getInstance().initialize(this.getApplicationContext(), GeTuiService.class);
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), GeTuiIntentService.class);

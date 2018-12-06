@@ -7,6 +7,7 @@ import cn.cloudworkshop.shop.base.BasePresenterImpl;
 import cn.cloudworkshop.shop.base.RetrofitUtils;
 import cn.cloudworkshop.shop.base.RxObserver;
 import cn.cloudworkshop.shop.bean.ShopListBean;
+import cn.cloudworkshop.shop.bean.VersionBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -41,6 +42,35 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
                     @Override
                     public void onError() {
                         getView().loadError();
+                    }
+
+                }));
+
+    }
+
+    @Override
+    public void checkUpdate() {
+        if (!isViewAttached())
+            return;
+        RetrofitUtils.getInstance()
+                .request()
+                .checkUpdate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxObserver<>(new RxObserver.Callback<VersionBean>() {
+                    @Override
+                    public void onSuccess(VersionBean versionBean) {
+                        getView().newVersion(versionBean.getData());
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
                     }
 
                 }));

@@ -48,7 +48,6 @@ public class MyApp extends Application {
                 return classicsFooter;
             }
         });
-
     }
 
     @Override

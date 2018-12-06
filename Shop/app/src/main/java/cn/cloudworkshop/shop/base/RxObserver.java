@@ -43,10 +43,9 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
         }
     }
 
-
     @Override
-    public void onError(@NonNull Throwable e) {
-        e.printStackTrace();
+    public void onError(@NonNull Throwable e) {e.printStackTrace();
+
         mCallback.onError();
     }
 

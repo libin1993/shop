@@ -30,6 +30,7 @@ import cn.cloudworkshop.shop.base.BaseMvpActivity;
 import cn.cloudworkshop.shop.bean.CustomerListBean;
 import cn.cloudworkshop.shop.mvp.altercutomer.AlterCustomerActivity;
 import cn.cloudworkshop.shop.mvp.guestrecord.GuestRecordActivity;
+import cn.cloudworkshop.shop.utils.GlideApp;
 import cn.cloudworkshop.shop.utils.ToastUtils;
 import cn.cloudworkshop.shop.view.LoadingView;
 
@@ -83,6 +84,12 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
         adapter = new CommonAdapter<CustomerListBean.DataBean>(this, R.layout.rv_customer_list_item, dataList) {
             @Override
             protected void convert(ViewHolder holder, CustomerListBean.DataBean dataBean, final int position) {
+                ImageView ivAvatar = holder.getView(R.id.iv_customer_avatar);
+                GlideApp.with(CustomerListActivity.this)
+                        .load(dataBean.getRecent_visit_imgurl())
+                        .into(ivAvatar);
+
+
                 holder.setText(R.id.tv_name_customer, dataBean.getGuest_name());
                 int age = dataBean.getGuest_age();
                 String customerAge = "";
@@ -105,7 +112,7 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
                 }
                 holder.setText(R.id.tv_sex_customer, sex);
 
-                String type;
+                String type = "";
                 switch (dataBean.getGuest_type()) {
                     case 1:
                         type = "员工";
@@ -121,9 +128,6 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
                         break;
                     case 5:
                         type = "新客";
-                        break;
-                    default:
-                        type = "";
                         break;
                 }
                 holder.setText(R.id.tv_type_customer, type);
@@ -142,15 +146,17 @@ public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.P
                     }
                 });
 
+
                 tvAlter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(CustomerListActivity.this, AlterCustomerActivity.class);
                         intent.putExtra("guest", dataList.get(position));
                         startActivity(intent);
+
+
                     }
                 });
-
             }
         };
         rvCustomer.setAdapter(adapter);

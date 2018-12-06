@@ -9,15 +9,9 @@
     <string name="shop_name">门店名称：</string>
     <string name="shop_info">门店信息：</string>
     <string name="shop_address">门店地址：</string>
-    <string name="customer_name">访客名称：</string>
-    <string name="customer_sex">访客性别：</string>
-    <string name="customer_age">访客年龄：</string>
-    <string name="customer_type">访客类型：</string>
-    <string name="customer_record">访客记录：</string>
     <string name="visit_time">访问时间：</string>
     <string name="input_name">请输入姓名</string>
     <string name="input_age">请输入年龄</string>
-    <string name="customer_phone">访客手机：</string>
     <string name="save">保存</string>
     <string name="name">姓名：</string>
     <string name="sex">性别：</string>
@@ -32,4 +26,14 @@
     <string name="guset_info">顾客信息</string>
     <string name="man">男</string>
     <string name="woman">女</string>
+    <string name="to">至</string>
+    <string name="flow_statistics">客流统计</string>
+    <string name="age_statistics">年龄统计</string>
+    <string name="sex_statistics">性别统计</string>
+    <string name="time_statistics">到店次数</string>
+    <string name="times_statistics">到店次数</string>
+    <string name="check_new_version">检测到新版本，请更新</string>
+    <string name="update_immediately">立即更新</string>
+    <string name="downloading">正在下载</string>
+    <string name="log_out">退出登录</string>
 </resources>

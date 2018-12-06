@@ -2,9 +2,11 @@ package cn.cloudworkshop.shop.mvp.shoplist;
 
 import java.util.List;
 
+import cn.cloudworkshop.shop.base.BaseBean;
 import cn.cloudworkshop.shop.base.BasePresenter;
 import cn.cloudworkshop.shop.base.BaseView;
 import cn.cloudworkshop.shop.bean.ShopListBean;
+import cn.cloudworkshop.shop.bean.VersionBean;
 import cn.cloudworkshop.shop.mvp.login.LoginContract;
 
 /**
@@ -18,9 +20,13 @@ public class ShopListContract {
         void loadSuccess(List<ShopListBean.DataBean> shopList);
 
         void loadFail(String msg);
+
+        void newVersion(VersionBean.DataBean data);
     }
 
     interface Presenter extends BasePresenter<ShopListContract.View> {
         void initData(String token);
+
+        void checkUpdate();
     }
 }

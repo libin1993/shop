@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 
 import cn.cloudworkshop.shop.application.MyApp;
-import cn.cloudworkshop.shop.utils.Api;
 import cn.cloudworkshop.shop.utils.NetWorkUtils;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -49,7 +48,8 @@ public class RetrofitUtils {
         // 指定缓存路径,缓存大小100Mb
         Cache cache = new Cache(new File(MyApp.getContext().getCacheDir(), "HttpCache"),
                 1024 * 1024 * 100);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(cache)
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .cache(cache)
                 .addInterceptor(getInterceptor())
                 .addNetworkInterceptor(getNetWorkInterceptor())
                 .connectTimeout(10, TimeUnit.SECONDS)

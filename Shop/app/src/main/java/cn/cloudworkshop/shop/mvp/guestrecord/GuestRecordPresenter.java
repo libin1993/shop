@@ -6,6 +6,7 @@ import cn.cloudworkshop.shop.base.RetrofitUtils;
 import cn.cloudworkshop.shop.base.RxObserver;
 import cn.cloudworkshop.shop.bean.CustomerListBean;
 import cn.cloudworkshop.shop.bean.GuestRecordBean;
+import cn.cloudworkshop.shop.utils.LogUtils;
 import cn.cloudworkshop.shop.utils.ObjectUtils;
 import cn.cloudworkshop.shop.utils.SPUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,7 +21,7 @@ public class GuestRecordPresenter extends BasePresenterImpl<GuestRecordContract.
     private int totalPage = 1;
 
     @Override
-    public void initData(int guestId, int page, final int type) {
+    public void initData(String guestId, int page, final int type) {
         if (!isViewAttached())
             return;
         if (page <= totalPage) {
@@ -30,8 +31,6 @@ public class GuestRecordPresenter extends BasePresenterImpl<GuestRecordContract.
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new RxObserver<>(new RxObserver.Callback<GuestRecordBean>() {
-
-
                         @Override
                         public void onSuccess(GuestRecordBean guestRecordBean) {
                             if (guestRecordBean.getPages() != null) {
@@ -75,7 +74,14 @@ public class GuestRecordPresenter extends BasePresenterImpl<GuestRecordContract.
 
                     }));
         } else {
-            getView().finishLoad();
+            switch (type) {
+                case 1:
+                    getView().finishRefresh();
+                    break;
+                case 2:
+                    getView().finishLoad();
+                    break;
+            }
         }
     }
 }
