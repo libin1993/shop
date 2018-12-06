@@ -143,6 +143,14 @@ public class TimesStatisticsActivity extends BaseMvpActivity<TimesStatisticsCont
             }
         });
 
+        YAxis leftYAxis = chartAge.getAxisLeft();
+        leftYAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value + "";
+            }
+        });
+
         //一个LineDataSet就是一条线
         BarDataSet barDataSet = new BarDataSet(entries, "次数");
         //格式化显示数据

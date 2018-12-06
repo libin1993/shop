@@ -98,7 +98,6 @@ public class SexStatisticsActivity extends BaseMvpActivity<SexStatisticsContact.
             }
         });
 
-
     }
 
     private void loadData() {
@@ -140,6 +139,14 @@ public class SexStatisticsActivity extends BaseMvpActivity<SexStatisticsContact.
                 } else {
                     return list.get(index);
                 }
+            }
+        });
+
+        YAxis leftYAxis = chartAge.getAxisLeft();
+        leftYAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value + "";
             }
         });
 

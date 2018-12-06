@@ -144,6 +144,15 @@ public class AgeStatisticsActivity extends BaseMvpActivity<AgeStatisticsContact.
             }
         });
 
+        YAxis leftYAxis = chartAge.getAxisLeft();
+        leftYAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value + "";
+            }
+        });
+
+
         //一个LineDataSet就是一条线
         BarDataSet barDataSet = new BarDataSet(entries, "年龄");
         //格式化显示数据
@@ -234,3 +243,7 @@ public class AgeStatisticsActivity extends BaseMvpActivity<AgeStatisticsContact.
         picker.show();
     }
 }
+
+
+
+

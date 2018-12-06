@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">门店</string>
+    <string name="app_name">妙定工场</string>
     <string name="please_input_pwd">请输入密码</string>
     <string name="please_input_no">请输入账号</string>
     <string name="shop_list">门店列表</string>
