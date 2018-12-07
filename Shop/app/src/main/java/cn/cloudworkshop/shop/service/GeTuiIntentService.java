@@ -8,6 +8,7 @@ import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 
+import cn.cloudworkshop.shop.utils.LogUtils;
 import cn.cloudworkshop.shop.utils.SPUtils;
 
 

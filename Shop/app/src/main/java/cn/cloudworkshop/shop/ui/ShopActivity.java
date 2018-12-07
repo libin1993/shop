@@ -70,36 +70,27 @@ public class ShopActivity extends BaseActivity {
         shopName = intent.getStringExtra("shop_name");
     }
 
-    @OnClick({R.id.iv_header_back, R.id.cv_shop_customer, R.id.cv_shop_data, R.id.cv_age, R.id.cv_sex, R.id.cv_times, R.id.tv_log_out})
+    @OnClick({R.id.iv_header_back, R.id.cv_shop_customer, R.id.cv_shop_data, R.id.cv_age, R.id.cv_sex,
+            R.id.cv_times, R.id.tv_log_out})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_header_back:
                 finish();
                 break;
             case R.id.cv_shop_customer:
-                Intent intent = new Intent(ShopActivity.this, CustomerListActivity.class);
-                intent.putExtra("shop_id", shopId);
-                startActivity(intent);
+                toActivity(CustomerListActivity.class);
                 break;
             case R.id.cv_shop_data:
-                Intent intentData = new Intent(ShopActivity.this, GuestStatisticsActivity.class);
-                intentData.putExtra("shop_id", shopId);
-                startActivity(intentData);
+                toActivity(GuestStatisticsActivity.class);
                 break;
             case R.id.cv_age:
-                Intent intentAge = new Intent(ShopActivity.this, AgeStatisticsActivity.class);
-                intentAge.putExtra("shop_id", shopId);
-                startActivity(intentAge);
+                toActivity(AgeStatisticsActivity.class);
                 break;
             case R.id.cv_sex:
-                Intent intentSex = new Intent(ShopActivity.this, SexStatisticsActivity.class);
-                intentSex.putExtra("shop_id", shopId);
-                startActivity(intentSex);
+                toActivity(SexStatisticsActivity.class);
                 break;
             case R.id.cv_times:
-                Intent intentTimes = new Intent(ShopActivity.this, TimesStatisticsActivity.class);
-                intentTimes.putExtra("shop_id", shopId);
-                startActivity(intentTimes);
+                toActivity(TimesStatisticsActivity.class);
                 break;
             case R.id.tv_log_out:
                 SPUtils.deleteStr(this,"token");
@@ -109,4 +100,12 @@ public class ShopActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void toActivity(Class cls){
+        Intent intent = new Intent(ShopActivity.this, cls);
+        intent.putExtra("shop_id", shopId);
+        startActivity(intent);
+    }
 }
+
+

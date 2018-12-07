@@ -77,7 +77,7 @@ public class TimesStatisticsActivity extends BaseMvpActivity<TimesStatisticsCont
     private void initView() {
         tvHeaderTitle.setText(getString(R.string.times_statistics));
         endTime = System.currentTimeMillis();
-        startTime = endTime - 30L * 24L * 60L * 60L * 1000L;
+        startTime = endTime - 7L * 24L * 60L * 60L * 1000L;
         tvStartTime.setText(DateUtils.getDate("yyyy-MM-dd", startTime));
         tvEndTime.setText(DateUtils.getDate("yyyy-MM-dd", endTime));
         loadingView.setState(LoadingView.State.LOADING);
@@ -241,3 +241,4 @@ public class TimesStatisticsActivity extends BaseMvpActivity<TimesStatisticsCont
         picker.show();
     }
 }
+

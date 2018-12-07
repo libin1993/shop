@@ -28,7 +28,6 @@ public class RxObserver<T extends BaseBean> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        LogUtils.log(t.toString());
         switch (t.getCode()) {
             case 10000:
                 mCallback.onSuccess(t);
