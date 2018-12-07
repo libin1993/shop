@@ -91,7 +91,6 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
 
                     @Override
                     public void onSuccess(BaseBean baseBean) {
-                        LogUtils.log(baseBean.getCode() + "");
                     }
 
                     @Override

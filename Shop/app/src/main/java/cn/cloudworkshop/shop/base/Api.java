@@ -62,5 +62,3 @@ public interface Api {
     Observable<BaseBean> uploadCid(@Field("token") String token, @Field("cid") String cid);
 }
 
-
-
