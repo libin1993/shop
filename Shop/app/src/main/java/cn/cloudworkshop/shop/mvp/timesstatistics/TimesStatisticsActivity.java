@@ -215,7 +215,8 @@ public class TimesStatisticsActivity extends BaseMvpActivity<TimesStatisticsCont
         picker.setCancelTextColor(ContextCompat.getColor(this, R.color.gray_22));
         picker.setSubmitTextColor(ContextCompat.getColor(this, R.color.gray_22));
         picker.setDividerColor(ContextCompat.getColor(this, R.color.gray_ed));
-        picker.setTextColor(ContextCompat.getColor(this, R.color.gray_22), ContextCompat.getColor(this, R.color.gray_6a));
+        picker.setTextColor(ContextCompat.getColor(this, R.color.gray_22),
+                ContextCompat.getColor(this, R.color.gray_6a));
 
         picker.setLabelTextColor(ContextCompat.getColor(this, R.color.gray_22));
         picker.setContentPadding(20, 0);

@@ -28,5 +28,7 @@ public class ShopListContract {
         void initData(String token);
 
         void checkUpdate();
+
+        void uploadCid(String token, String cid);
     }
 }

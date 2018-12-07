@@ -122,6 +122,7 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
         });
 
         mPresenter.checkUpdate();
+        mPresenter.uploadCid(SPUtils.getStr(this, "token"), SPUtils.getStr(this, "client_id"));
     }
 
     /**
@@ -188,7 +189,7 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
     @Override
     public void newVersion(final VersionBean.DataBean data) {
         if (data.getVersion_id() > getVersionCode()) {
-            if (EasyPermissions.hasPermissions(ShopListActivity.this,permissionStr)){
+            if (EasyPermissions.hasPermissions(ShopListActivity.this, permissionStr)) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(ShopListActivity.this,
                         R.style.Theme_AppCompat_DayNight_Dialog_Alert);
                 dialog.setCancelable(false);
@@ -204,7 +205,7 @@ public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter
 
                 dialog.create();
                 dialog.show();
-            }else {
+            } else {
                 EasyPermissions.requestPermissions(this, "", 1235, permissionStr);
             }
         }

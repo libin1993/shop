@@ -56,6 +56,10 @@ public interface Api {
 
     @GET("/index.php/mrjapp/version/get_latest_version")
     Observable<VersionBean> checkUpdate();
+
+    @FormUrlEncoded
+    @POST("/index.php/mrjapp/login/update_cid")
+    Observable<BaseBean> uploadCid(@Field("token") String token, @Field("cid") String cid);
 }
 
 
