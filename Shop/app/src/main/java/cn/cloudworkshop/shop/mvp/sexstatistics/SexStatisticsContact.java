@@ -24,3 +24,5 @@ public class SexStatisticsContact {
         void initData(Map<String, Object> map);
     }
 }
+
+

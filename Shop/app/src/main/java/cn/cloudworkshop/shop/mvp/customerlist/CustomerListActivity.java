@@ -37,7 +37,7 @@ import cn.cloudworkshop.shop.view.LoadingView;
 /**
  * Author：Libin on 2018/11/28 18:08
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：访客列表
  */
 public class CustomerListActivity extends BaseMvpActivity<CustomerListContract.Presenter> implements CustomerListContract.View {
     @BindView(R.id.rv_customer_list)

@@ -18,15 +18,15 @@ import cn.cloudworkshop.shop.mvp.agestatistics.AgeStatisticsActivity;
 import cn.cloudworkshop.shop.mvp.customerlist.CustomerListActivity;
 import cn.cloudworkshop.shop.mvp.gueststatistics.GuestStatisticsActivity;
 import cn.cloudworkshop.shop.mvp.login.LoginActivity;
+import cn.cloudworkshop.shop.mvp.sexstatistics.SexActivity;
 import cn.cloudworkshop.shop.mvp.sexstatistics.SexStatisticsActivity;
 import cn.cloudworkshop.shop.mvp.timesstatistics.TimesStatisticsActivity;
 import cn.cloudworkshop.shop.utils.SPUtils;
-//import cn.cloudworkshop.shop.mvp.guestcount.GuestCountActivity;
 
 /**
  * Author：Libin on 2018/11/28 17:45
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：门店
  */
 public class ShopActivity extends BaseActivity {
     @BindView(R.id.iv_header_back)
@@ -87,13 +87,13 @@ public class ShopActivity extends BaseActivity {
                 toActivity(AgeStatisticsActivity.class);
                 break;
             case R.id.cv_sex:
-                toActivity(SexStatisticsActivity.class);
+                toActivity(SexActivity.class);
                 break;
             case R.id.cv_times:
                 toActivity(TimesStatisticsActivity.class);
                 break;
             case R.id.tv_log_out:
-                SPUtils.deleteStr(this,"token");
+                SPUtils.deleteStr(this, "token");
                 Intent logout = new Intent(ShopActivity.this, LoginActivity.class);
                 logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(logout);
@@ -101,8 +101,8 @@ public class ShopActivity extends BaseActivity {
         }
     }
 
-    private void toActivity(Class cls){
-        Intent intent = new Intent(ShopActivity.this, cls);
+    private void toActivity(Class cls) {
+        Intent intent = new Intent(this, cls);
         intent.putExtra("shop_id", shopId);
         startActivity(intent);
     }

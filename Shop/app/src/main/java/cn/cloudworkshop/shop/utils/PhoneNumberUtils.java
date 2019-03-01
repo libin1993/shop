@@ -10,7 +10,7 @@ import android.text.TextUtils;
 
 public class PhoneNumberUtils {
     public static boolean judgePhoneNumber(String phoneNumber) {
-        return isMatchLength(phoneNumber) && isMobileNO(phoneNumber);
+        return isMatchLength(phoneNumber) && isMobileNo(phoneNumber);
     }
 
 
@@ -23,26 +23,22 @@ public class PhoneNumberUtils {
      */
     private static boolean isMatchLength(String str) {
         return !TextUtils.isEmpty(str) && str.getBytes().length == 11;
-
     }
 
     /**
      * 验证手机号码格式
-     *
-     * 电信
-     * 133、153、180、181、189、177、173、149
-     * 联通
-     * 130、131、132、155、156、145、185、186、176、175
-     * 移动
-     * 1340-1348、135、136、137、138、139、150、151、152、157、158、159、182、183、184、187、188、147、178
      */
-
-    private static boolean isMobileNO(String mobileNum) {
-        // "[1]"代表第1位为数字1，"[3456789]"代表第二位可以为3、4、5、7、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        String telRegex = "[1][3456789]\\d{9}";
-        return !TextUtils.isEmpty(mobileNum) && mobileNum.matches(telRegex);
+    private static boolean isMobileNo(String mobileNo) {
+        // "1"代表第1位为数字1，"[3-9]"代表第二位可以为3-9中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        String telRegex = "1[3-9]\\d{9}";
+        return !TextUtils.isEmpty(mobileNo) && mobileNo.matches(telRegex);
     }
+
 }
+
+
+
+
 
 
 

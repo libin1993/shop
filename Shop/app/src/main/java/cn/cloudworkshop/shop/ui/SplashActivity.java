@@ -67,8 +67,9 @@ public class SplashActivity extends BaseActivity {
                             startActivity(new Intent(SplashActivity.this, ShopListActivity.class));
                             finish();
                         }
-
                     }
+
+
 
                     @Override
                     public void onFail(String msg) {
@@ -100,6 +101,7 @@ public class SplashActivity extends BaseActivity {
 
             }
 
+
             @Override
             public void onFinish() {
                 Intent intent;
@@ -112,7 +114,8 @@ public class SplashActivity extends BaseActivity {
                 finish();
             }
         };
-
         countDownTimer.start();
     }
 }
+
+

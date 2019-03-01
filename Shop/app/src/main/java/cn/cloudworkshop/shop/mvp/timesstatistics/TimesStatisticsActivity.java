@@ -41,7 +41,7 @@ import cn.qqtheme.framework.picker.DatePicker;
 /**
  * Author：Libin on 2018/12/5 17:12
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：进店次数
  */
 public class TimesStatisticsActivity extends BaseMvpActivity<TimesStatisticsContact.Presenter> implements TimesStatisticsContact.View {
     @BindView(R.id.iv_header_back)

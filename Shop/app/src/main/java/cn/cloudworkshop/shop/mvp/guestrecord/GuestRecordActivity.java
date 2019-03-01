@@ -31,7 +31,7 @@ import cn.cloudworkshop.shop.view.LoadingView;
 /**
  * Author：Libin on 2018/11/29 16:06
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：访客记录
  */
 public class GuestRecordActivity extends BaseMvpActivity<GuestRecordContract.Presenter> implements GuestRecordContract.View {
     @BindView(R.id.rv_customer_list)

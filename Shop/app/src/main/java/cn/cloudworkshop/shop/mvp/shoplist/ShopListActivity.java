@@ -48,6 +48,9 @@ import cn.cloudworkshop.shop.view.LoadingView;
 import cn.cloudworkshop.shop.view.PermissionDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
+/**
+ * 门店列表
+ */
 public class ShopListActivity extends BaseMvpActivity<ShopListContract.Presenter> implements ShopListContract.View, EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.rv_shop_list)

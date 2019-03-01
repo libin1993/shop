@@ -13,8 +13,3 @@ public class LogUtils {
         Log.d("libin", log);
     }
 }
-
-
-
-
-

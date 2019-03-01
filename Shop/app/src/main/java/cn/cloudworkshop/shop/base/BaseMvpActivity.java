@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
  * Email：1993911441@qq.com
  * Describe：
  */
-public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements BaseView{
+public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements BaseView {
 
     protected P mPresenter;
 
@@ -22,7 +22,6 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
             throw new NullPointerException("Presenter is null! Do you return null in initPresenter()?");
         }
         mPresenter.attach(this);
-
     }
 
 

@@ -25,7 +25,6 @@ public class SexStatisticsPresenter extends BasePresenterImpl<SexStatisticsConta
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RxObserver<>(new RxObserver.Callback<GuestCountBean>() {
-
                     @Override
                     public void onSuccess(GuestCountBean guestCountBean) {
                         getView().hideLoading();
@@ -46,3 +45,5 @@ public class SexStatisticsPresenter extends BasePresenterImpl<SexStatisticsConta
                 }));
     }
 }
+
+

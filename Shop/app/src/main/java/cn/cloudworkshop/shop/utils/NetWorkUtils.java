@@ -24,3 +24,5 @@ public class NetWorkUtils {
         return networkinfo != null && networkinfo.isAvailable();
     }
 }
+
+

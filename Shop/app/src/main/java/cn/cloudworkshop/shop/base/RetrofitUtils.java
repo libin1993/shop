@@ -47,7 +47,7 @@ public class RetrofitUtils {
 
         // 指定缓存路径,缓存大小100Mb
         Cache cache = new Cache(new File(MyApp.getContext().getCacheDir(), "HttpCache"),
-                1024 * 1024 * 100);
+                1024L * 1024L * 100L);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cache(cache)
                 .addInterceptor(getInterceptor())
@@ -103,6 +103,7 @@ public class RetrofitUtils {
             }
         };
     }
-
-
 }
+
+
+

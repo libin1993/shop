@@ -23,7 +23,7 @@ import cn.cloudworkshop.shop.view.LoadingView;
 /**
  * Author：Libin on 2018/11/28 13:56
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：登录
  */
 public class LoginActivity extends BaseMvpActivity<LoginContract.Presenter> implements LoginContract.View {
     @BindView(R.id.et_user_name)

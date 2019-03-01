@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference;
  * Email：1993911441@qq.com
  * Describe：Presenter生命周期包装、View的绑定和解除，P层实现的基类
  */
-public class BasePresenterImpl<V  extends BaseView> implements BasePresenter<V>{
+public class BasePresenterImpl<V extends BaseView> implements BasePresenter<V> {
 
     private WeakReference<V> view;
 

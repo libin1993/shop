@@ -88,9 +88,9 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RxObserver<>(new RxObserver.Callback<BaseBean>() {
-
                     @Override
                     public void onSuccess(BaseBean baseBean) {
+
                     }
 
                     @Override
@@ -106,3 +106,5 @@ public class ShopListPresenter extends BasePresenterImpl<ShopListContract.View> 
                 }));
     }
 }
+
+

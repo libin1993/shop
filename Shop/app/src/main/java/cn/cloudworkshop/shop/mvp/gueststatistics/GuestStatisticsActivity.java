@@ -41,7 +41,7 @@ import cn.qqtheme.framework.picker.DatePicker;
 /**
  * Author：Libin on 2018/12/5 10:28
  * Email：1993911441@qq.com
- * Describe：
+ * Describe：客流统计
  */
 public class GuestStatisticsActivity extends BaseMvpActivity<GuestStatisticsContract.Presenter> implements GuestStatisticsContract.View {
     @BindView(R.id.iv_header_back)

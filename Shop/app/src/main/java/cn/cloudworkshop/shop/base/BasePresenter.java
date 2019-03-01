@@ -6,7 +6,7 @@ package cn.cloudworkshop.shop.base;
  * Describe：
  */
 public interface BasePresenter<T extends BaseView> {
-    public void attach(T mView);
+    void attach(T mView);
 
-    public void detach();
+    void detach();
 }

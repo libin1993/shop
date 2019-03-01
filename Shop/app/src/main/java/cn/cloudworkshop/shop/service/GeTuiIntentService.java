@@ -33,13 +33,13 @@ public class GeTuiIntentService extends GTIntentService {
     @Override
     public void onReceiveMessageData(Context context, GTTransmitMessage gtTransmitMessage) {
 
-
     }
 
     @Override
     public void onReceiveOnlineState(Context context, boolean b) {
 
     }
+
 
     @Override
     public void onReceiveCommandResult(Context context, GTCmdMessage gtCmdMessage) {

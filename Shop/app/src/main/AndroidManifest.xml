@@ -88,6 +88,7 @@
         <activity android:name=".mvp.agestatistics.AgeStatisticsActivity"/>
         <activity android:name=".mvp.timesstatistics.TimesStatisticsActivity"/>
         <activity android:name=".mvp.sexstatistics.SexStatisticsActivity"/>
+        <activity android:name=".mvp.sexstatistics.SexActivity"/>
 
         <service
             android:name=".service.GeTuiService"
